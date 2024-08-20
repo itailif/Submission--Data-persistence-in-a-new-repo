@@ -13,10 +13,12 @@ using UnityEditor;
 public class MenuUIHandler : MonoBehaviour
 {
     public TextMeshProUGUI playerNameInput;
+    public TextMeshProUGUI HighScoreText;
     
     // Start is called before the first frame update
     void Start()
     {
+        UpdateHighScore();
         playerNameInput.text = GameManager.Instance.PlayerName;
     }
 
@@ -49,6 +51,18 @@ public class MenuUIHandler : MonoBehaviour
         Debug.Log(playerNameInput.text);
     }
 
+    public void UpdateHighScore()
+    {
+        string highPlayer = GameManager.Instance.HighPlayer;
+        int highScore = GameManager.Instance.HighScore;
 
-    
+        HighScoreText.text = $"High Score {highPlayer} Score : {highScore}";
+    }
+
+    public void ResetHighScore()
+    {
+        GameManager.Instance.HighPlayer = "";
+        GameManager.Instance.HighScore = 0;
+        UpdateHighScore();
+    }
 }
